@@ -66,10 +66,10 @@ touch Dockerfile
 
 用你最喜欢的文本编辑器打开这个 `Dockerfile`。
 
-我们要做的第一件事是定义我们需要从哪个镜像进行构建。这里我们将使用最新的 LTS（长期服务器支持版），`Node` 的版本号为 `10`。你可以从 [Docker 站点](https://hub.docker.com/) 获取相关镜像：
+我们要做的第一件事是定义我们需要从哪个镜像进行构建。这里我们将使用最新的 LTS（长期服务器支持版），`Node` 的版本号为 `12`。你可以从 [Docker 站点](https://hub.docker.com/) 获取相关镜像：
 
 ```docker
-FROM node:10
+FROM node:12
 ```
 
 下一步在镜像中创建一个文件夹存放应用程序代码，这将是你的应用程序工作目录：
@@ -108,7 +108,7 @@ COPY . .
 EXPOSE 8080
 ```
 
-最后但同样重要的事是，使用定义运行时的 `CMD` 定义命令来运行应用程序。这里我们使用最简单的 `npm start` 命令，它将运行 `node server.js` 启动你的服务器：
+最后但同样重要的事是，使用定义运行时的 `CMD` 定义命令来运行应用程序。这里我们使用 `node server.js` 来启动你的服务器：
 
 ```docker
 CMD [ "node", "server.js" ]
@@ -117,7 +117,7 @@ CMD [ "node", "server.js" ]
 你的 `Dockerfile` 现在看上去是这个样子：
 
 ```docker
-FROM node:10
+FROM node:12
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -154,7 +154,7 @@ npm-debug.log
 进入到 `Dockerfile` 所在的那个目录中，运行以下命令构建 Docker 镜像。开关符 `-t` 让你标记你的镜像，以至于让你以后很容易地用 `docker images` 找到它。
 
 ```bash
-docker build -t <your username>/node-web-app .
+docker build . -t <your username>/node-web-app
 ```
 
 Docker 现在将给出你的镜像列表：
@@ -164,7 +164,7 @@ $ docker images
 
 # Example
 REPOSITORY                      TAG        ID              CREATED
-node                            8          1934b0b038d1    5 days ago
+node                            12         1934b0b038d1    5 days ago
 <your username>/node-web-app    latest     d64d3505b0d2    1 minute ago
 ```
 

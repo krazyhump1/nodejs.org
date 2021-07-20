@@ -5,16 +5,22 @@
 <body>
   {{> header }}
 
-  <div id="main">
+  <main id="main">
     <div class="container">
 
       <div id="home-intro">
 
         {{{ contents }}}
 
-        {{#if project.banner.visible}}
+        {{#if site.banners.blacklivesmatter.visible}}
+          <div class="home-blacklivesmatterblock">
+            <a tabindex="0" role="button" aria-pressed="false" class="home-blacklivesmatterbutton" href="{{ site.banners.blacklivesmatter.link }}">{{ site.banners.blacklivesmatter.text }}</a>
+          </div>
+        {{/if}}
+
+        {{#if ( betweenDate site.banners.index.startDate site.banners.index.endDate ) }}
           <p class="home-version home-version-banner">
-            <a href="{{ project.banner.link }}">{{ project.banner.text }}</a>
+            <a href="{{ site.banners.index.link }}">{{ site.banners.index.text }}</a>
           </p>
         {{/if}}
 
@@ -68,15 +74,10 @@
         <p>
           {{{ labels.version-schedule-prompt }}} <a href="/{{site.locale}}/about/releases/">{{ labels.version-schedule-prompt-link-text }}</a>
         </p>
-        {{#if labels.newsletter }}
-        <p>
-          {{{ labels.newsletter-prefix }}} <a href="https://newsletter.nodejs.org/">Node.js Everywhere</a>{{{ labels.newsletter-postfix }}}
-        </p>
-        {{/if}}
       </div>
 
     </div>
-  </div>
+  </main>
 
   {{> footer className="no-margin-top" }}
 </body>

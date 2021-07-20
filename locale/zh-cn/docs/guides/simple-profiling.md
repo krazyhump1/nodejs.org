@@ -26,7 +26,7 @@ app.get('/newUser', (req, res) => {
 
   username = username.replace(/[!@#$%^&*]/g, '');
 
-  if (!username || !password || users.username) {
+  if (!username || !password || !users[username]) {
     return res.sendStatus(400);
   }
 
@@ -129,7 +129,7 @@ node --prof-process isolate-0xnnnnnnnnnnnn-v8.log > processed.txt
     215    0.6%          Unaccounted
 ```
 
-这告诉我们：收集到的所有样本中有 97% 是在 C++ 代码中进行的。当查看处理的输出的其它部分时，我们应该最注意 C++ 中所做的工作（而不是 JavaScript）。考虑到这一点，我们接下来会找到 [C++] 部分，其中包含有关 C++ 函数占用最多 CPU 时间的信息，然后查看一下：
+这告诉我们：收集到的所有样本中有 97% 是在 C++ 代码中进行的。当查看处理的输出的其它部分时，我们应该最注意 C++ 中所做的工作（而不是 JavaScript）。考虑到这一点，我们接下来会找到 \[C++\] 部分，其中包含有关 C++ 函数占用最多 CPU 时间的信息，然后查看一下：
 
 ```
  [C++]:
@@ -139,7 +139,7 @@ node --prof-process isolate-0xnnnnnnnnnnnn-v8.log > processed.txt
    3165    8.4%    8.6%  _malloc_zone_malloc
 ```
 
-我们看到，前 3 个条目占了程序占用的 CPU 时间的 72.1%。从这个输出中，我们立即看到至少 51.8% 的 CPU 时间被称为 PBKDF2 的函数占用。它与用户密码中的哈希生成相对应。然而，较低的两个条目的因素是如何进入我们的应用程序（或者我们为了例子而假装如此）不会立即明显得看出来。为了更好地理解这些函数之间的关系，接下来我们将查看[自下而上（重）配置文件]部分，该节提供有关每个函数的主要调用方的信息。检查此部分，我们会发现：
+我们看到，前 3 个条目占了程序占用的 CPU 时间的 72.1%。从这个输出中，我们立即看到至少 51.8% 的 CPU 时间被称为 PBKDF2 的函数占用。它与用户密码中的哈希生成相对应。然而，较低的两个条目的因素是如何进入我们的应用程序（或者我们为了例子而假装如此）不会立即明显得看出来。为了更好地理解这些函数之间的关系，接下来我们将查看\[自下而上（重）配置文件\]部分，该节提供有关每个函数的主要调用方的信息。检查此部分，我们会发现：
 
 ```
    ticks parent  name
@@ -217,5 +217,8 @@ Percentage of the requests served within a certain time (ms)
 
 希望通过对此（诚然是做作的）示例的性能调查，您已经看到了 V8 刻度处理器如何帮助您更好地了解 Node.js 应用程序的性能。
 
+你也会发现[如何创建火焰图][]对你是有帮助的。
+
 [V8 内探测器]: https://v8.dev/docs/profile
 [异步编程的好处]: https://nodesource.com/blog/why-asynchronous
+[如何创建火焰图]: /zh-cn/docs/guides/diagnostics-flamegraph/

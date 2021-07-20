@@ -1,5 +1,6 @@
 {
   "title": "Node.js",
+  "editOnGithub":"Edit On GitHub",
   "author": "Node.js",
   "url": "https://nodejs.org/en/",
   "locale": "en",
@@ -12,7 +13,6 @@
   "by": "by",
   "all-downloads": "All download options",
   "nightly": "Nightly builds",
-  "chakracore-nightly": "Node-ChakraCore Nightly builds",
   "unofficial-builds": "Unofficial builds",
   "previous": "Previous",
   "next": "Next",
@@ -84,6 +84,9 @@
     },
     "install-on-linux": {
       "text": "Installing Node.js via binary archive"
+    },
+    "install-on-wsl": {
+      "text": "Install on Windows Subsystem for Linux (WSL)"
     }
   },
   "docs": {
@@ -127,7 +130,7 @@
       "text": "Contribute"
     },
     "conduct": {
-      "link": "https://github.com/nodejs/node/blob/master/doc/guides/contributing/coc.md#code-of-conduct",
+      "link": "https://github.com/nodejs/node/blob/master/doc/guides/contributing/code-of-conduct.md",
       "text": "Code of Conduct"
     },
     "node-meetups": {
@@ -138,6 +141,10 @@
   "security": {
     "link": "security",
     "text": "Security"
+  },
+  "getcertified": {
+    "link": "https://openjsf.org/certification",
+    "text": "Certification"
   },
   "blog": {
     "link": "blog",
@@ -150,6 +157,19 @@
   "links": {
     "pages": {
       "changelog": "Changelog"
+    }
+  },
+  "banners": {
+    "index": {
+      "startDate": "2021-07-01T16:00:00.000Z",
+      "endDate": "2021-07-13T16:00:00.000Z",
+      "text": "New security releases now available for 16.x, 14.x, and 12.x release lines",
+      "link": "blog/vulnerability/july-2021-security-releases/"
+    },
+    "blacklivesmatter": {
+      "visible": false,
+      "text": "#BlackLivesMatter",
+      "link": "black-lives-matter/"
     }
   }
 }
